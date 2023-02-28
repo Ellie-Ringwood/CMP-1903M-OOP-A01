@@ -26,12 +26,12 @@ namespace CMP1903M_A01_2223
 
         public static void shuffleCardPack(int typeOfShuffle)
         {
-            List<Card> tempPack = new List<Card>();
+            Random random = new Random();
             switch (typeOfShuffle) 
             {
                 case 0: //Fisher-Yates shuffle
-                    Random random = new Random();
-                    while (pack != null)
+                    List<Card> tempPack = new List<Card>();
+                    while (pack.Count() >0)
                     {
                         int num = random.Next(0, pack.Count());
                         tempPack.Add(pack.ElementAt(num));
@@ -39,33 +39,112 @@ namespace CMP1903M_A01_2223
                     }
                     pack = tempPack;
                     break;
+
+
                 case 1: //Riffle shuffle
-                    break;
+                    int cut = (pack.Count() / 2) + random.Next(-2, 2);
+                    
+                    List<Card> tempPackLeft = new List<Card>();
+                    List<Card> tempPackRight = new List<Card>();
+
+                    for (int i = 0; i < cut; i++)
+                    {
+                        tempPackLeft.Add(pack.ElementAt(0));
+                        pack.RemoveAt(0);
+                    }
+                    while (pack.Count() > 0)
+                    {
+                        tempPackRight.Add(pack.ElementAt(0));
+                        pack.RemoveAt(0);
+                    }
+                    bool first = true;
+                    int packToMerge = -1;
+                    while ((tempPackRight.Count()>0)||(tempPackLeft.Count()>0))
+                    {
+                        if (first == true)
+                        {
+                            switch (random.Next(0, 2))
+                            {
+                                case 0:
+                                    packToMerge = 0;
+                                    break;
+                                case 1:
+                                    packToMerge = 1;
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            if(tempPackRight.Count() > tempPackLeft.Count())
+                            {
+                                packToMerge = 0;
+                            }
+                            else
+                            {
+                                packToMerge = 1;
+                            }
+                        }
+                        int numOfCards = random.Next(1, 2); // randomises how many cards are merged at a time
+                        switch (packToMerge) 
+                        {
+                            case 0:
+                                for (int i = 0; i< numOfCards; i++) 
+                                {
+                                    if (tempPackRight.Count() > 0)
+                                    {
+                                        pack.Add(tempPackRight.ElementAt(0));
+                                        tempPackRight.RemoveAt(0);
+                                    }
+                                }
+                                break;
+                            case 1:
+                                for (int i = 0; i < numOfCards; i++)
+                                {
+                                    if(tempPackLeft.Count() > 0) 
+                                    {
+                                        pack.Add(tempPackLeft.ElementAt(0));
+                                        tempPackLeft.RemoveAt(0);
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                        break;
+
+
                 case 2: //No shuffle
+                    Console.WriteLine("No shuffle");
                     break;
-            }
-            for (int i = 0; i < pack.Count(); i++)
-            {
-                Console.WriteLine(pack.ElementAt(i));
             }
         }
 
         public static Card deal()
         {
             //Deals one card
+            Card tempCard = pack.ElementAt(0);
             pack.RemoveAt(0);
-            return pack.ElementAt(0);
+            return tempCard;
         }
+
         public static List<Card> dealCard(int amount)
         {
             //Deals the number of cards specified by 'amount'
             List<Card> deltCards = new List<Card>();
             for (int i = 0; i < amount; i++)
             {
-                pack.RemoveAt(0);
                 deltCards.Add(pack.ElementAt(0));
+                pack.RemoveAt(0);
             }
             return deltCards;
+        }
+
+        public static void printPack()
+        {
+            Console.WriteLine("\nPack");
+            for (int i = 0; i < pack.Count(); i++)
+            {
+                Console.WriteLine(pack.ElementAt(i).Value.ToString() + " , " + pack.ElementAt(i).Suit.ToString());
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace CMP1903M_A01_2223
         public int Suit 
         {
             get { return _suit; }
-            set { if (value < 5 && value > 0) { _suit = value; } }
+            set { if (value < 5 && value > 0) { _suit = value; }}
         }
     }
 }
