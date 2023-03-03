@@ -9,6 +9,7 @@ namespace CMP1903M_A01_2223
     internal class Testing
     {
         public static Pack pack = new Pack();
+
         public static void UserTesting()
         {
             bool running = true;
@@ -28,7 +29,7 @@ namespace CMP1903M_A01_2223
                         Pack.shuffleCardPack(2); //No Shuffle
                         break;
                     case "4":
-                        printCard(Pack.deal()); // deals one card from top
+                        Pack.deal().printCard(); // deals one card from top
                         break;
                     case "5":
                         bool valid = false;
@@ -41,8 +42,15 @@ namespace CMP1903M_A01_2223
                                 int inputCardsToDeal = Convert.ToInt32(Console.ReadLine());
                                 if (inputCardsToDeal <= Pack.pack.Count()) // checks if number entered is more than cards in the deck
                                 {
-                                    cardsToDeal = inputCardsToDeal;
-                                    valid = true;
+                                    if (inputCardsToDeal <= 0)
+                                    {
+                                        Console.WriteLine("Incorrect Entry: Number of cards to deal is negative or zero");
+                                    }
+                                    else
+                                    {
+                                        cardsToDeal = inputCardsToDeal;
+                                        valid = true;
+                                    }
                                 }
                                 else
                                 {
@@ -58,7 +66,7 @@ namespace CMP1903M_A01_2223
                         deltCards = Pack.dealCard(cardsToDeal);
                         for (int i = 0; i < cardsToDeal; i++)
                         {
-                            printCard(deltCards.ElementAt(i)); // prints multiple cards
+                            deltCards.ElementAt(i).printCard(); // prints multiple cards
                         }
                         break;
                     case "6": // stop program
@@ -69,10 +77,6 @@ namespace CMP1903M_A01_2223
                         break;
                 }
             }
-        }
-        public static void printCard(Card card) // prints a card in nice format
-        {
-            Console.WriteLine("Value: " + card.Value.ToString() + " , Suit: " + card.Suit.ToString());
         }
     }
 }

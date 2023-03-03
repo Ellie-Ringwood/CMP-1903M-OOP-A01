@@ -156,7 +156,7 @@ namespace CMP1903M_A01_2223
             Console.WriteLine("\nPack");
             for (int i = 0; i < _pack.Count(); i++)
             {
-                Console.WriteLine(_pack.ElementAt(i).Value.ToString() + " , " + _pack.ElementAt(i).Suit.ToString());
+                _pack.ElementAt(i).printCard();
             }
         }
     }
