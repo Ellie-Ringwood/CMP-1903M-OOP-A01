@@ -15,7 +15,8 @@ namespace CMP1903M_A01_2223
             bool running = true;
             while (running == true)
             {
-                Console.WriteLine("\nENTER NUMBER\n1: Fisher-Yates shuffle\n2: Riffle shuffle\n3: No shuffle\n4: Deal a card\n5: Deal many cards\n6: Stop program\n");
+                Console.WriteLine("\nENTER NUMBER\n1: Fisher-Yates shuffle\n2: Riffle shuffle\n3: No shuffle\n4: Print deck\n5: Deal a card\n6: Deal many cards\n7: Stop program");
+                Console.WriteLine("There are "+Pack.pack.Count()+" cards in the pack");
                 string shuffleInput = (string)Console.ReadLine();
                 switch (shuffleInput)
                 {
@@ -29,14 +30,17 @@ namespace CMP1903M_A01_2223
                         Pack.shuffleCardPack(2); //No Shuffle
                         break;
                     case "4":
-                        Pack.deal().printCard(); // deals one card from top
+                        Pack.printPack(); //Print deck
                         break;
                     case "5":
+                        Pack.deal().printCard(); // deals one card from top
+                        break;
+                    case "6":
                         bool valid = false;
                         int cardsToDeal = 0;
                         while (valid == false) // repeats until valid number entered
                         {
-                            Console.WriteLine("How many cards?\n");
+                            Console.WriteLine("How many cards?");
                             try
                             {
                                 int inputCardsToDeal = Convert.ToInt32(Console.ReadLine());
@@ -69,7 +73,7 @@ namespace CMP1903M_A01_2223
                             deltCards.ElementAt(i).printCard(); // prints multiple cards
                         }
                         break;
-                    case "6": // stop program
+                    case "7": // stop program
                         running = false;
                         break;
                     default:

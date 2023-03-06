@@ -45,7 +45,6 @@ namespace CMP1903M_A01_2223
                         _pack.RemoveAt(num);
                     }
                     _pack = tempPack;
-                    printPack();
                     break;
 
 
@@ -120,13 +119,11 @@ namespace CMP1903M_A01_2223
                             }
                         }
                     }
-                    printPack();
                     break;
 
 
                 case 2: //No shuffle
                     Console.WriteLine("No shuffle");
-                    printPack();
                     break;
             }
         }
