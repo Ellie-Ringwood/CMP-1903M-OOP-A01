@@ -8,6 +8,7 @@ namespace CMP1903M_A01_2223
 {
     class Card
     {
+        //ENCAPSULATION
         private string[] Suits = { "Hearts", "Spades", "Diamonds", "Clubs" };
         private string[] Values = { "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King" };
         public Card() 
@@ -30,6 +31,7 @@ namespace CMP1903M_A01_2223
             set { if (value < 5 && value > 0) { _suit = value; }} //checks the suit is valid
         }
 
+        //ADITIONAL METHOD
         public void printCard() // prints card in nice format
         {
             Console.WriteLine(Values[Value - 1] + " Of " + Suits[Suit - 1]);
